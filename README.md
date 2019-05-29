@@ -1,8 +1,8 @@
 # Izo Race
 
 ## Delete a remote branch
-$ git push origin --delete <branch> # Git version 1.7.0 or newer 
-$ git push origin :<branch> # Git versions older than 1.7.0
+$ git push origin --delete <branch>
+$ git push origin :<branch>
 
 ## Delete a local branch
 $ git branch --delete <branch>
