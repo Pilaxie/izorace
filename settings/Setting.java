@@ -7,7 +7,6 @@ public class Setting{
 	public static void main(String[] args){
 		Setting settings = new Setting();
 		settings.load();
-		settings.set("WIDTH", 1280);
 		settings.save();
 	}
 
