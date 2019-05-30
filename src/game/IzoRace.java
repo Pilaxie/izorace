@@ -49,9 +49,7 @@ public class IzoRace {
 		
 		stateHandler.setState("MENU_STATE");
 		
-		canvas.setSize(640, 480);
-		//canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
-		canvas.setSize(1000, 480);
+		canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
 		canvas.addKeyListener(in);
 		canvas.addMouseListener(in);
 		canvas.addMouseMotionListener(in);
