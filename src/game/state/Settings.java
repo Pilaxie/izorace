@@ -15,17 +15,32 @@ import game.IzoRace;
 import game.state.listener.SettingsActionListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
+import nightingale.ui.NButton;
 import nightingale.ui.NUIGroup;
 
 public class Settings implements NState{
-	public static final String SETTINGS_PATH = "./settings.settings";
+	//public static final String SETTINGS_PATH = "./settings.settings";
+	public static final String SETTINGS_PATH = "settings.settings";
 	
 	private static HashMap<String, Integer> settings = new HashMap<String, Integer>();
 
+	public static void setDefaultSettings() {
+		settings.clear();
+		settings.put("WIDTH", 800);
+		settings.put("HEIGHT", 600);
+		//settings.put("FULLSCREEN", 0);
+		//settings.put("VOLUME", 100);
+		//settings.put("ANTI-ALIASING", 0);
+	}
+	
 	public static void load(){
 		File settingsFile = new File(SETTINGS_PATH);
 		try {
-			settingsFile.createNewFile();
+			if( settingsFile.createNewFile() ) {
+				System.out.println("kavo");
+				setDefaultSettings();
+				save();
+			}
 		} catch (IOException e) { e.printStackTrace(); }
 		try{
 			FileReader fr = new FileReader(settingsFile);
@@ -61,7 +76,7 @@ public class Settings implements NState{
 	public static void save(){
 		try{
 			String line;
-			FileWriter fw = new FileWriter("SETTINGS_PATH");
+			FileWriter fw = new FileWriter(SETTINGS_PATH);
 			BufferedWriter bf = new BufferedWriter(fw);
 			
 			for(String i : settings.keySet()){
@@ -81,6 +96,8 @@ public class Settings implements NState{
 	
 	NUIGroup uigroup = new NUIGroup();
 	{
+		uigroup.addElement("DEFAULT_SETTINGS", new NButton(100, 400, 100, 60));
+		// Set listener to all elements in group(MUST BE LAST LINE)
 		uigroup.setActionListener(listener);
 	}
 	
