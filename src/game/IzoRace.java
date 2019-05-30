@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
