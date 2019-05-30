@@ -29,7 +29,7 @@ public class Menu implements NState{
 
 	@Override
 	public void update() {
-		uigroup.perform(IzoRace.instance.in);
+		uigroup.perform(IzoRace.in);
 	}
 
 }

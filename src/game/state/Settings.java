@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -16,13 +18,17 @@ import nightingale.ui.NActionListener;
 import nightingale.ui.NUIGroup;
 
 public class Settings implements NState{
-	public static final String SETTINGS_PATH = "settings.txt";
+	public static final String SETTINGS_PATH = "./settings.settings";
 	
 	private static HashMap<String, Integer> settings = new HashMap<String, Integer>();
 
-	public void load(){
+	public static void load(){
+		File settingsFile = new File(SETTINGS_PATH);
+		try {
+			settingsFile.createNewFile();
+		} catch (IOException e) { e.printStackTrace(); }
 		try{
-			FileReader fr = new FileReader("SETTINGS_PATH");
+			FileReader fr = new FileReader(settingsFile);
 			Scanner scan = new Scanner (fr);
 			
 			String line;
@@ -52,7 +58,7 @@ public class Settings implements NState{
 		return settings.get(name);
 	}
 
-	public void save(){
+	public static void save(){
 		try{
 			String line;
 			FileWriter fw = new FileWriter("SETTINGS_PATH");
@@ -85,6 +91,6 @@ public class Settings implements NState{
 
 	@Override
 	public void update() {
-		uigroup.perform(IzoRace.instance.in);
+		uigroup.perform(IzoRace.in);
 	}
 }

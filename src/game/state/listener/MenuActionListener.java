@@ -11,7 +11,7 @@ public class MenuActionListener implements NActionListener {
 	
 	@Override
 	public void actionPerform(NUIElement element) {
-		
+		if(element.getName() == "EXIT_BUTTON") System.exit(1);
 	}
 
 }

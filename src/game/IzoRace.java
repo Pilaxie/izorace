@@ -14,26 +14,28 @@ import nightingale.thread.NThread;
 
 public class IzoRace {
 
-	public static IzoRace instance;
+	//public static IzoRace instance;
 	
-	public NInput in = new Input();
-	public NCanvas canvas = new NCanvas(new Drawer());
-	public NStateHandler stateHandler = new NStateHandler();
-	NThread renderThread = new NThread("RENDER_THREAD", canvas);
-	NThread updateThread = new NThread("UPDATE_THREAD", new Runnable() {
+	public static NInput in = new Input();
+	public static NCanvas canvas = new NCanvas(new Drawer());
+	public static NStateHandler stateHandler = new NStateHandler();
+	static NThread renderThread = new NThread("RENDER_THREAD", canvas);
+	static NThread updateThread = new NThread("UPDATE_THREAD", new Runnable() {
 		public void run() {
 			stateHandler.updateCurrentState();
 		}
 	});
 	
-	JFrame gameFrame = new JFrame("Izo race");
+	static JFrame gameFrame = new JFrame("Izo race");
 	
-	public int getFPS() {
+	public static int getFPS() {
 		return renderThread.getTicks();
 	}
 	
-	public void init() {
+	public static void init() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
+		
+		Settings.load();
 		
 		stateHandler.addState("MENU_STATE", new Menu());
 		stateHandler.addState("SETTINGS_STATE", new Settings());
@@ -42,7 +44,7 @@ public class IzoRace {
 		stateHandler.setState("MENU_STATE");
 		
 		canvas.setSize(640, 480);
-		//canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
+		canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
 		canvas.addKeyListener(in);
 		canvas.addMouseListener(in);
 		canvas.addMouseMotionListener(in);
@@ -63,8 +65,7 @@ public class IzoRace {
 	}
 	
 	public static void main(String[] args) {
-		instance = new IzoRace();
-		instance.init();
+		
 	}
 	
 }

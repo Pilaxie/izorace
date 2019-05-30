@@ -11,9 +11,9 @@ public class Drawer implements NDrawer{
 	
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
-		IzoRace.instance.stateHandler.drawCurrentState(g, g2d, at);
+		IzoRace.stateHandler.drawCurrentState(g, g2d, at);
 		
 		g.setColor(Color.YELLOW);
-		g.drawString("FPS: "+IzoRace.instance.getFPS(), 0, g.getFont().getSize());
+		g.drawString("FPS: "+IzoRace.getFPS(), 0, g.getFont().getSize());
 	}
 }
