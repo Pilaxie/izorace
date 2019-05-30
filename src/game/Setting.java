@@ -5,11 +5,6 @@ public class Setting{
 
 	public static final String SETTINGS_PATH = "settings.txt";	
 	private HashMap<String, Integer> settings = new HashMap<String, Integer>();
-	public static void main(String[] args){
-		Setting settings = new Setting();
-		settings.load();
-		settings.save();
-	}
 
 	public void load(){
 		String line;
