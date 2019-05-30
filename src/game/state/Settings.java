@@ -1,15 +1,24 @@
-package game;
+package game.state;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Setting{
+import game.IzoRace;
+import game.state.listener.SettingsActionListener;
+import nightingale.state.NState;
+import nightingale.ui.NActionListener;
+import nightingale.ui.NUIGroup;
+
+public class Settings implements NState{
 	public static final String SETTINGS_PATH = "settings.txt";
 	
-	private HashMap<String, Integer> settings = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> settings = new HashMap<String, Integer>();
 
 	public void load(){
 		try{
@@ -32,12 +41,12 @@ public class Setting{
 		}catch(Exception e){}	
 	}
 
-	public void set(String name, int value){
+	public static void set(String name, int value){
 		if (settings.containsKey(name))
 			settings.replace(name, value);
 	}
 
-	public int get(String name){
+	public static int get(String name){
 		if(!settings.containsKey(name) )
 			return 0;
 		return settings.get(name);
@@ -58,7 +67,24 @@ public class Setting{
 			bf.flush();
 			bf.close();
 			fw.close();
-		}catch(Exception e){}
-		
+		}catch(Exception e){}	
+	}
+	
+	// State
+	protected NActionListener listener = new SettingsActionListener(this);
+	
+	NUIGroup uigroup = new NUIGroup();
+	{
+		uigroup.setActionListener(listener);
+	}
+	
+	@Override
+	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
+		uigroup.draw(g, g2d, at);
+	}
+
+	@Override
+	public void update() {
+		uigroup.perform(IzoRace.instance.in);
 	}
 }
