@@ -73,6 +73,11 @@ public class Settings implements NState{
 		return settings.get(name);
 	}
 
+	public static void apply() {
+		IzoRace.canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
+		IzoRace.frameRefresh();
+	}
+	
 	public static void save(){
 		try{
 			String line;
@@ -97,6 +102,7 @@ public class Settings implements NState{
 	NUIGroup uigroup = new NUIGroup();
 	{
 		uigroup.addElement("DEFAULT_SETTINGS", new NButton(100, 400, 100, 60));
+		uigroup.addElement("BACK_BUTTON", new NButton(450, 450, 100, 60));
 		// Set listener to all elements in group(MUST BE LAST LINE)
 		uigroup.setActionListener(listener);
 	}

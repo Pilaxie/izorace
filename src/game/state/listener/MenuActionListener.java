@@ -1,5 +1,6 @@
 package game.state.listener;
 
+import game.IzoRace;
 import game.state.Menu;
 import nightingale.ui.NActionListener;
 import nightingale.ui.NUIElement;
@@ -12,6 +13,8 @@ public class MenuActionListener implements NActionListener {
 	@Override
 	public void actionPerform(NUIElement element) {
 		if(element.getName() == "EXIT_BUTTON") System.exit(1);
+		if( element.getName() == "SETTINGS_BUTTON" )  IzoRace.stateHandler.setState("SETTINGS_STATE");
+		//if( element.getName() == "GAME_BUTTON" ) IzoRace.stateHandler.setState("GAME_STATE");
 	}
 
 }
