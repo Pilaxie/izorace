@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Setting{
-		
+
+	public static final String SETTINGS_PATH = "settings.txt";	
 	private HashMap<String, Integer> settings = new HashMap<String, Integer>();
 	public static void main(String[] args){
 		Setting settings = new Setting();
@@ -15,7 +16,7 @@ public class Setting{
 		String name;
 		int key;
 		try{
-			FileReader fr = new FileReader("Settings.txt");
+			FileReader fr = new FileReader("SETTINGS_PATH");
 			Scanner scan = new Scanner (fr);
 			while(scan.hasNextLine()){
 				line = scan.nextLine();
@@ -45,7 +46,7 @@ public class Setting{
 	public void save(){
 		try{
 			String line;
-			FileWriter fw = new FileWriter("Settings.txt");
+			FileWriter fw = new FileWriter("SETTINGS_PATH");
 			BufferedWriter bf = new BufferedWriter(fw);
 			
 			for(String i : settings.keySet()){
