@@ -1,15 +1,12 @@
 package game.obj;
 
-import java.awt.Dimension;
-
-public enum Cars {
-	Long  (new Dimension(36, 60)),
-	Hatch (new Dimension(30, 45));
+public enum Cars {	
+	Long  (new Specifications(36, 60, 8)),
+	Hatch (new Specifications(30, 45, 6));
 	
-	private Dimension dim;
+	private Specifications spec;
 	
-	Cars(Dimension dim){ this.dim = dim; }
+	Cars(Specifications spec){ this.spec = spec; }
 	
-	public int getWidth() { return dim.width; }
-	public int getHeight() { return dim.height; }
+	public Specifications getSpecs() { return spec; }
 }

@@ -5,15 +5,18 @@ import nightingale.game.NGameObject;
 
 public class Car extends NGameObject{
 
-	protected Cars kind = Cars.Hatch;
+	protected Cars kind = null;
+	protected Hitbox hitbox = null;
 	
-	protected Hitbox hitbox;
+	protected float maxV = 0;
 	
-	public Hitbox getHitbox() { return hitbox; }
+	// Getters
+	public Hitbox getHitbox() { return hitbox; }	
 	
 	public Car(Cars kind, int x, int y) {
-		super(x, y, kind.getWidth(), kind.getHeight());
+		super(x, y, kind.getSpecs().getWidth(), kind.getSpecs().getHeight());
 		this.kind = kind;
+		this.maxV = this.kind.getSpecs().getMaxV();
 		this.hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight());
 	}
 	
