@@ -12,6 +12,11 @@ public class GameActionListener implements NActionListener {
 	
 	@Override
 	public void actionPerform(NUIElement element) {
+		if(element.getName() == "RESUME") {
+			state.paused = false;
+		}else if(element.getName() == "TO MENU") {
+			IzoRace.stateHandler.setState("MENU");
+		}
 	}
 
 }

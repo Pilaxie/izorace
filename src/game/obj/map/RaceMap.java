@@ -17,7 +17,11 @@ public class RaceMap extends NMap{
 	
 	public RaceMap(int[][] tiles, List<NGameObject> checkpoints) {
 		super(tiles, IMPASSABLE_TYPES, 0, 0, TILE_WIDTH, TILE_HEIGHT);
-		this.checkpoints = (NGameObject[])checkpoints.toArray();
+		try {
+			this.checkpoints = (NGameObject[])checkpoints.toArray();
+		}catch(NullPointerException e) {
+			System.out.println("NO CHECKPOINTS");
+		}
 	}
 	
 	public void draw(MapDrawer drawer, Graphics g, Graphics2D g2d, AffineTransform at) {
