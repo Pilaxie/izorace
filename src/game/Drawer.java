@@ -15,5 +15,6 @@ public class Drawer implements NDrawer{
 		
 		g.setColor(Color.YELLOW);
 		g.drawString("FPS: "+IzoRace.getFPS(), 0, g.getFont().getSize());
+		g.drawString("UPS: "+IzoRace.getUPS(), 0, g.getFont().getSize()*2);
 	}
 }

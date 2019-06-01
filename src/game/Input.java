@@ -27,6 +27,12 @@ public class Input extends NInput{
 		case KeyEvent.VK_ESCAPE:
 			ESC_KEY.toggle(isPressed);
 			break;
+		case KeyEvent.VK_A:
+			LEFT.toggle(isPressed);
+			break;
+		case KeyEvent.VK_D:
+			RIGHT.toggle(isPressed);
+			break;
 		}
 	}
 

@@ -40,6 +40,10 @@ public class IzoRace {
 		return renderThread.getTicks();
 	}
 	
+	public static int getUPS() {
+		return updateThread.getTicks();
+	}
+	
 	public static void init() {		
 		Settings.load();
 		

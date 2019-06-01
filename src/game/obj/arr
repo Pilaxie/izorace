@@ -1,0 +1,173 @@
+using System;
+using System.Windows.Forms;
+using System.Drawing;
+
+namespace agresive
+{
+	public class APoint
+	{
+		public float X { get; set; }
+		public float Y { get; set; }
+		public float Angle { get; set; }
+
+		public APoint(float x, float y)
+		{
+			X = x;
+			Y = y;
+		}
+	}
+
+	public class ALine
+	{
+		public APoint[] points = new APoint[0];
+
+		public APoint A { get; set; }
+		public APoint B { get; set; }
+
+		public ALine(APoint a, APoint b)
+		{
+			A = a;
+			B = b;
+		}	
+	}
+
+	public class AObject
+	{
+		public float CenterX { get; set; }
+		public float CenterY { get; set; }
+
+		public float Width { get; set; }
+		public float Height { get; set; }
+		public float Angle { get; set; }
+
+		public APoint[] points = new APoint[4];
+		public ALine[] lines = new ALine[4];
+
+		private float R { get; set; }
+
+		public AObject(int cx, int cy, int w, int h)
+		{
+			CenterX = cx;
+			CenterY = cy;
+			Width = w;
+			Height = h;
+			Angle = 233f;
+
+			for(int i=0;i<points.Length;i++)
+				points[i] = new APoint(0, 0);
+
+			R = (float)Math.Sqrt( Math.Pow(Width/2 , 2) + 
+					      Math.Pow(Height/2, 2) );
+
+		}
+
+		private bool IsLinePartsIntersected(ALine l1, ALine l2)
+		{
+			double common = (l1.B.X - l1.A.X)*(l2.B.Y - l2.A.Y)
+				-(l1.B.Y - l1.A.Y)*(l2.B.X - l2.A.X);
+
+			if( common == 0 ) return false;
+
+			double rH = (l1.A.Y - l2.A.Y)*(l2.B.X - l2.A.X)
+				   -(l1.A.X - l2.A.X)*(l2.B.Y - l2.A.Y);
+			double sH = (l1.A.Y - l2.A.Y)*(l1.B.X - l1.A.X)
+				   -(l1.A.X - l2.A.X)*(l1.B.Y - l1.A.Y);
+			double r = rH / common;
+			double s = sH / common;
+
+			if( r>= 0 && r<= 1 && s >= 0 & s<= 1) 
+				return true;
+			else return false;
+		}
+
+
+		public bool CollideWith(AObject obj)
+		{
+			for(int i=0;i<lines.Length;i++)
+				for(int j=0;j<obj.lines.Length;j++)
+					if (IsLinePartsIntersected(lines[i], obj.lines[j]))
+						return true;
+			return false;
+		}
+
+
+		public void Draw(PaintEventArgs e)
+		{
+			//A
+			points[0].X = CenterX -  Width/2;
+			points[0].Y = CenterY - Height/2;				        
+			//B
+			points[1].X = CenterX +  Width/2;
+			points[1].Y = CenterY - Height/2;
+			//C
+			points[2].X = CenterX +  Width/2;
+			points[2].Y = CenterY + Height/2;
+			//D
+			points[3].X = CenterX -  Width/2;
+			points[3].Y = CenterY + Height/2;
+			//Angle
+			for(int i=0;i<points.Length;i++)
+			{
+				points[i].Angle = (float)(Math.Atan2(CenterY-points[i].Y, CenterX-points[i].X)
+				points[i].X = CenterX - (float)(R*Math.Cos(
+				(Math.PI*Angle/180)+points[i].Angle));
+				points[i].Y = CenterY - (float)(R*Math.Sin(
+				(Math.PI*Angle/180)+points[i].Angle));
+			}
+
+			lines[0] = new ALine(points[0], points[1]);
+			lines[1] = new ALine(points[1], points[2]);
+			lines[2] = new ALine(points[2], points[3]);
+			lines[3] = new ALine(points[3], points[0]);
+			//Draw lines	
+			Pen pen = new Pen(Color.Black, 1);
+			e.Graphics.DrawLine(pen, points[0].X, points[0].Y,
+						 points[1].X, points[1].Y);
+			e.Graphics.DrawLine(pen, points[1].X, points[1].Y,
+						 points[2].X, points[2].Y);
+			e.Graphics.DrawLine(pen, points[2].X, points[2].Y,
+						 points[3].X, points[3].Y);
+			e.Graphics.DrawLine(pen, points[3].X, points[3].Y,
+						 points[0].X, points[0].Y);
+
+			pen = new Pen(Color.LightGray, 1);
+			e.Graphics.DrawEllipse(pen, CenterX - R, CenterY - R,
+					            R*2, R*2);
+		}
+	}
+	
+	public class AForm : Form
+	{
+		AObject obj = new AObject(100, 100, 100, 60);
+		AObject obj1 = new AObject(190, 190, 150, 100);
+
+		public AForm() 
+		{
+			obj1.Angle = 185;
+			Width  = 640;
+			Height = 480;
+		}
+
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			obj.Draw(e);
+			obj1.Draw(e);
+			if(obj.CollideWith(obj1))
+			{
+				Pen pp = new Pen(Color.Red, 1);
+				e.Graphics.DrawRectangle(pp, 10, 10, 10, 10);
+			}
+		}
+	}
+
+	public class AProg
+	{
+		[STAThread]
+		public static void Main(string[] args)
+		{
+			Application.EnableVisualStyles();
+			Application.Run(new AForm());
+		}
+
+	}
+}
