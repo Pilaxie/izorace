@@ -1,7 +1,4 @@
-package game.obj;
-
-import java.awt.Color;
-import java.awt.Graphics;
+package game.phys;
 
 import nightingale.game.NGameObject;
 
@@ -11,8 +8,6 @@ public class Hitbox extends NGameObject {
 	
 	public Point[] points = new Point[4];
 	public Line[] lines = new Line[4];
-
-	public boolean colide = false;
 	
 	public float getAngle() { return angle; }
 	
@@ -33,7 +28,6 @@ public class Hitbox extends NGameObject {
 	}
 	
 	public void update() {
-		colide = false;
 		//A
 		points[0].x = getCenterX() -  width/2;
 		points[0].y = getCenterY() - height/2;				        
@@ -60,14 +54,6 @@ public class Hitbox extends NGameObject {
 		lines[1] = new Line(points[1], points[2]);
 		lines[2] = new Line(points[2], points[3]);
 		lines[3] = new Line(points[3], points[0]);
-	}
-	
-	public void draw(Graphics g) {
-		if(colide)
-			g.setColor(Color.YELLOW);
-		else g.setColor(Color.BLUE);
-		for(int i=0;i<lines.length;i++)
-			g.drawLine((int)lines[i].a.x, (int)lines[i].a.y, (int)lines[i].b.x, (int)lines[i].b.y);
 	}
 	
 	public boolean collideWith(Hitbox hitbox) {

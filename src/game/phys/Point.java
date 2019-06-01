@@ -1,4 +1,4 @@
-package game.obj;
+package game.phys;
 
 public class Point {
 	public float x, y;

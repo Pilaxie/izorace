@@ -30,8 +30,6 @@ public class Game implements NState, MapDrawer{
 	
 	public boolean paused = false;
 	
-	private List<Hitbox> hitbox = new ArrayList<Hitbox>();
-	
 	public Game() {
 		pauseMenu.addElement("PAUSE_LABEL", new NLabel("PAUSED", 340, 250, 100, 30));
 		pauseMenu.addElement("RESUME", new NButton(345, 300, 90, 40));
@@ -41,9 +39,6 @@ public class Game implements NState, MapDrawer{
 	
 	@Override
 	public void install() {
-		Random random = new Random();
-		for(int i=0;i<20;i++)
-			hitbox.add(new Hitbox(30+random.nextInt(500), 30+random.nextInt(400), 30+random.nextInt(40), 30+random.nextInt(40)));
 		int[][] types = new int[][] {
 			{0,0,1,1,1,0},
 			{0,1,1,0,1,1},
@@ -51,47 +46,26 @@ public class Game implements NState, MapDrawer{
 			{1,1,0,1,1,0}
 		};
 		currentMap = new RaceMap(types, null);
-	
 	}
 	
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		currentMap.draw(this, g, g2d, at);
 		
-		for(Hitbox hit : hitbox) 
-			hit.draw(g);
-		
 		if(paused) 
 			pauseMenu.draw(g, g2d, at);
 	}
 
-	private float angle = 0;
 	
 	@Override
 	public void update() {
 		if(paused) {
 			pauseMenu.perform(IzoRace.in);
 		}
-		
-		for(Hitbox hit : hitbox) {
-			hit.update();
-			for(Hitbox hit2 : hitbox)
-				if(hit != hit2)
-					if(hit.collideWith(hit2))
-						hit.colide = true;
-		}
 			
 		//INPUT
 		if(Input.ESC_KEY.isClicked()) paused = !paused;
-		
-		if(Input.LEFT.isPressed()) angle-=1f;
-		else if(Input.RIGHT.isPressed()) angle+=1f;;
-		for(Hitbox hit : hitbox) 
-			hit.setAngle(angle);
-		angle = hitbox.get(0).getAngle();
 	}
-
-	
 	
 	@Override
 	public void drawTile(NMapTile tile, Graphics g, Graphics2D g2d, AffineTransform at) {
