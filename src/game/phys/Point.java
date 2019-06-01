@@ -1,6 +1,6 @@
 package game.phys;
 
-public class Point {
+class Point {
 	public float x, y;
 	public float angle = 0;
 	

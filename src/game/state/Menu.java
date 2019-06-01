@@ -17,9 +17,9 @@ public class Menu implements NState{
 	
 	NUIGroup uigroup = new NUIGroup();
 	public Menu(){
-		uigroup.addElement("GAME_BUTTON", new NButton(100, 50, 100, 55));
-		uigroup.addElement("SETTINGS_BUTTON", new NButton(100, 115, 100, 55));
-		uigroup.addElement("EXIT_BUTTON", new NButton(100, 180, 100, 55));
+		uigroup.addElement("GAME_BUTTON", new NButton(100, 300, 100, 55));
+		uigroup.addElement("SETTINGS_BUTTON", new NButton(100, 365, 100, 55));
+		uigroup.addElement("EXIT_BUTTON", new NButton(100, 430, 100, 55));
 		uigroup.addElement("TITLE_LABEL", new NLabel("Izo race", 300, 60, 150, 40));
 		uigroup.setActionListener(listener);
 	}

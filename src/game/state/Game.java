@@ -4,13 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import game.Input;
 import game.IzoRace;
-import game.obj.Hitbox;
 import game.obj.map.MapDrawer;
 import game.obj.map.RaceMap;
 import game.state.listener.GameActionListener;

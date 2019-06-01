@@ -1,6 +1,6 @@
 package game.phys;
 
-public class Line {
+class Line {
 	public Point a, b;
 	
 	public Line(Point a, Point b) {

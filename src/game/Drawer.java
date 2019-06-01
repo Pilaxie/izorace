@@ -14,7 +14,11 @@ public class Drawer implements NDrawer{
 		IzoRace.stateHandler.drawCurrentState(g, g2d, at);
 		
 		g.setColor(Color.YELLOW);
-		g.drawString("FPS: "+IzoRace.getFPS(), 0, g.getFont().getSize());
-		g.drawString("UPS: "+IzoRace.getUPS(), 0, g.getFont().getSize()*2);
+		g.drawString("FPS: "+IzoRace.getFPS(), 
+				IzoRace.canvas.getWidth()-g.getFontMetrics().stringWidth("FPS: "+IzoRace.getFPS()),
+				g.getFont().getSize());
+		g.drawString("UPS: "+IzoRace.getUPS(), 
+				IzoRace.canvas.getWidth()-g.getFontMetrics().stringWidth("UPS: "+IzoRace.getUPS()),
+				g.getFont().getSize()*2);
 	}
 }
