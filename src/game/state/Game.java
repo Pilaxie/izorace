@@ -48,11 +48,8 @@ public class Game implements NState, MapDrawer{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		currentMap.draw(this, g, g2d, at);
-		if(paused) {
-			g.setColor(Color.RED);
-			g.drawLine(0, 0, 500, 500);
+		if(paused) 
 			pauseMenu.draw(g, g2d, at);
-		}
 	}
 
 	@Override

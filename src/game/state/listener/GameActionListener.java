@@ -15,7 +15,7 @@ public class GameActionListener implements NActionListener {
 		if(element.getName() == "RESUME") {
 			state.paused = false;
 		}else if(element.getName() == "TO MENU") {
-			IzoRace.stateHandler.setState("MENU");
+			IzoRace.stateHandler.setState("MENU_STATE");
 		}
 	}
 
