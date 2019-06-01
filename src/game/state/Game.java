@@ -27,15 +27,14 @@ public class Game implements NState, MapDrawer{
 	public boolean paused = false;
 	
 	public Game() {
-		load();
-		
-		pauseMenu.addElement("PAUSE_LABEL", new NLabel("PAUSED", 340, 250, 100, 50));
+		pauseMenu.addElement("PAUSE_LABEL", new NLabel("PAUSED", 340, 250, 100, 30));
 		pauseMenu.addElement("RESUME", new NButton(345, 300, 90, 40));
 		pauseMenu.addElement("TO MENU", new NButton(345, 400, 90, 40));
 		pauseMenu.setActionListener(listener);
 	}
 	
-	public void load() {
+	@Override
+	public void install() {
 		int[][] types = new int[][] {
 			{0,0,1,1,1,0},
 			{0,1,1,0,1,1},

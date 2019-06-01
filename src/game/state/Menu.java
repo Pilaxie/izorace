@@ -25,6 +25,9 @@ public class Menu implements NState{
 	}
 	
 	@Override
+	public void install() {}
+	
+	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		uigroup.draw(g, g2d, at);
 	}

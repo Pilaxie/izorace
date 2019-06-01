@@ -1,6 +1,7 @@
 package game.state.listener;
 
 import game.IzoRace;
+import game.state.Game;
 import game.state.Menu;
 import nightingale.ui.NActionListener;
 import nightingale.ui.NUIElement;
