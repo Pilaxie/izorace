@@ -28,7 +28,7 @@ public class Car extends NGameObject{
 	public float               V() { return            v; }
 	public float getTurningSpeed() { return turningSpeed; }
 	public float getAcceleration() { return acceleration; }	
-	public float getBrake()        { return        brake; }
+	public float        getBrake() { return        brake; }
 	
 	// Setters
 	public void setV(float v) {
@@ -41,7 +41,6 @@ public class Car extends NGameObject{
 		setX(cx - getWidth()/2);
 		setY(cy - getHeight()/2);
 	}
-	
 	
 	private void checkAngleRange() {
 		if(this.angle < 0)

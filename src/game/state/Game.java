@@ -84,5 +84,4 @@ public class Game implements NState, MapDrawer{
 			break;
 		}
 	}
-
 }
