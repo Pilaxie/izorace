@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import game.phys.hitbox.Hitbox;
+import game.phys.hitbox.RectHitbox;
 import nightingale.game.NGameObject;
 import nightingale.util.NCamera;
 
@@ -73,8 +74,7 @@ public class Car extends NGameObject{
 		this.acceleration = this.kind.getSpecs().getAcceleration();
 		this.turningSpeed = this.kind.getSpecs().getTurningSpeed();
 		this.brake = this.kind.getSpecs().getBrake();
-		this.hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight());
-		this.hitbox.update();
+		this.hitbox = new RectHitbox(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	public void update() {

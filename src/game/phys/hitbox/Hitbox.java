@@ -24,8 +24,6 @@ public abstract class Hitbox extends NGameObject {
 	protected float R = 0;
 	
 	public float R() { return R; }
-	
-	public Hitbox() {}
 
 	public abstract void update();
 	

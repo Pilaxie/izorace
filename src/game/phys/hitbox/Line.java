@@ -8,6 +8,10 @@ class Line {
 		this.b = b;
 	}
 	
+	public float length() {
+		return (float)( Math.sqrt( Math.pow(a.x-b.x, 2) + Math.pow(a.y-b.y, 2) ) );
+	}
+	
 	public static boolean isLineIntersects(Line l1, Line l2) {
 		double common = (l1.b.x - l1.a.x)*(l2.b.y - l2.a.y)
 				-(l1.b.y - l1.a.y)*(l2.b.x - l2.a.x);

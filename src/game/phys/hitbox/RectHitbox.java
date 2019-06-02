@@ -15,8 +15,7 @@ public class RectHitbox extends Hitbox{
 		for(int i=0;i<points.length;i++)
 			points[i] = new Point(0, 0);
 		
-		R = (float)Math.sqrt( Math.pow(width/2 , 2) + 
-			      Math.pow(height/2, 2) );
+		R = (float)Math.sqrt( Math.pow(width/2 , 2) + Math.pow(height/2, 2) );
 		update();
 	}
 
@@ -35,8 +34,7 @@ public class RectHitbox extends Hitbox{
 		points[3].x = getCenterX() -  width/2;
 		points[3].y = getCenterY() + height/2;
 		//angle
-		for(int i=0;i<points.length;i++)
-		{
+		for(int i=0;i<points.length;i++){
 			points[i].angle = (float)(Math.atan2(getCenterY()-points[i].y, getCenterX()-points[i].x));
 			points[i].x = getCenterX() - (float)(R*Math.cos(
 			(Math.PI*angle/180)+points[i].angle));
