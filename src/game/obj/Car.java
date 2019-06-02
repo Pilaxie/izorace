@@ -1,7 +1,13 @@
 package game.obj;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+
 import game.phys.Hitbox;
 import nightingale.game.NGameObject;
+import nightingale.util.NCamera;
 
 public class Car extends NGameObject{
 	protected Cars kind = null;
@@ -26,6 +32,14 @@ public class Car extends NGameObject{
 	public void setV(float v) {
 		this.v = v;
 		if(V() > getMaxV()) this.v = getMaxV();
+		else if (V() < 0 ) this.v = 0;
+	}
+	
+	public void Gas() {
+		setV(V()+getAcceleration());
+	}
+	
+	public void Brake() {
 	}
 	
 	public Car(Cars kind, int x, int y) {
@@ -37,5 +51,13 @@ public class Car extends NGameObject{
 	
 	public void update() {
 		hitbox.update();
-	}	
+	}
+	
+	public void draw(Graphics g, Graphics2D g2d, AffineTransform at, NCamera cam) {
+		at = AffineTransform.getTranslateInstance(getX(cam)+getWidth(cam)/2, getY(cam)+getHeight(cam)/2);
+		at.scale(cam.delta, cam.delta);
+		at.rotate(Math.toRadians(hitbox.getAngle()));
+		g.setColor(Color.YELLOW);
+		hitbox.draw(g);
+	}
 }

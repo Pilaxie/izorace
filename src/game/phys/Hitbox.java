@@ -1,10 +1,12 @@
 package game.phys;
 
+import java.awt.Graphics;
+
 import nightingale.game.NGameObject;
 
 public class Hitbox extends NGameObject {
 
-	public float angle = 0;
+	protected float angle = 0;
 	
 	public Point[] points = new Point[4];
 	public Line[] lines = new Line[4];
@@ -63,6 +65,11 @@ public class Hitbox extends NGameObject {
 					return true;
 		
 		return false;
+	}
+	
+	public void draw(Graphics g) {
+		for(int i=0;i<lines.length;i++)
+			g.drawLine((int)lines[i].a.x, (int)lines[i].a.y, (int)lines[i].b.x, (int)lines[i].b.y);
 	}
 	
 }
