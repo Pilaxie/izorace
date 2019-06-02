@@ -12,6 +12,7 @@ import game.obj.Cars;
 import game.obj.map.MapDrawer;
 import game.obj.map.RaceMap;
 import game.obj.map.RaceMapTile;
+import game.phys.Phys;
 import game.state.listener.GameActionListener;
 import nightingale.game.map.NMapTile;
 import nightingale.state.NState;
@@ -75,6 +76,7 @@ public class Game implements NState, MapDrawer{
 		}
 		
 		car.update();
+		Phys.mapCollision(car.getHitbox(), this.currentMap);
 		
 		//INPUT
 		if(Input.ESC_KEY.isClicked()) paused = !paused;
