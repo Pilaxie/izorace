@@ -11,6 +11,7 @@ import game.obj.Car;
 import game.obj.Cars;
 import game.obj.map.MapDrawer;
 import game.obj.map.RaceMap;
+import game.obj.map.RaceMapTile;
 import game.state.listener.GameActionListener;
 import nightingale.game.map.NMapTile;
 import nightingale.state.NState;
@@ -89,7 +90,9 @@ public class Game implements NState, MapDrawer{
 		case 4:
 		case 2:
 			g.setColor(Color.MAGENTA);
-			g.drawRect((int)tile.getX(), (int)tile.getY(), (int)tile.getWidth(), (int)tile.getHeight());
+			try {
+				((RaceMapTile)tile).getHitbox().draw(g);
+			}catch(NullPointerException e) {}
 			break;
 		}
 	}
