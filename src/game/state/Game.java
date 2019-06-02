@@ -10,6 +10,7 @@ import game.IzoRace;
 import game.obj.Car;
 import game.obj.Cars;
 import game.obj.map.MapDrawer;
+import game.obj.map.MapLoader;
 import game.obj.map.RaceMap;
 import game.obj.map.RaceMapTile;
 import game.phys.Phys;
@@ -43,20 +44,7 @@ public class Game implements NState, MapDrawer{
 	
 	@Override
 	public void install() {
-		int[][] types = new int[][] {
-			{0, 0, 0, 0, 0, 2, 2, 0},
-			{0, 0, 0, 0, 2, 0, 0, 2},
-			{0, 0, 0, 0, 2, 0, 0, 2},
-			{0, 0, 0, 0, 3, 0, 0, 2},
-			{0, 0, 0, 3, 0, 0, 4, 0},
-			{0, 0, 3, 0, 0, 4, 0, 0},
-			{0, 3, 0, 0, 4, 0, 0, 0},
-			{2, 0, 0, 4, 0, 0, 0, 0},
-			{2, 0, 0, 2, 0, 0, 0, 0},
-			{2, 0, 0, 2, 0, 0, 0, 0},
-			{0, 2, 2, 0, 0, 0, 0, 0}
-		};
-		currentMap = new RaceMap(types, null);
+		currentMap = MapLoader.load("testmap");
 	}
 	
 	@Override
