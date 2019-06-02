@@ -42,10 +42,17 @@ public class Game implements NState, MapDrawer{
 	@Override
 	public void install() {
 		int[][] types = new int[][] {
-			{0,0,1,1,1,0},
-			{0,1,1,0,1,1},
-			{1,1,0,0,1,1},
-			{1,1,0,1,1,0}
+			{0, 0, 0, 0, 0, 2, 2, 0},
+			{0, 0, 0, 0, 2, 0, 0, 2},
+			{0, 0, 0, 0, 2, 0, 0, 2},
+			{0, 0, 0, 0, 3, 0, 0, 2},
+			{0, 0, 0, 3, 0, 0, 4, 0},
+			{0, 0, 3, 0, 0, 4, 0, 0},
+			{0, 3, 0, 0, 4, 0, 0, 0},
+			{2, 0, 0, 4, 0, 0, 0, 0},
+			{2, 0, 0, 2, 0, 0, 0, 0},
+			{2, 0, 0, 2, 0, 0, 0, 0},
+			{0, 2, 2, 0, 0, 0, 0, 0}
 		};
 		currentMap = new RaceMap(types, null);
 	}
@@ -78,7 +85,9 @@ public class Game implements NState, MapDrawer{
 	@Override
 	public void drawTile(NMapTile tile, Graphics g, Graphics2D g2d, AffineTransform at) {
 		switch(tile.getType()) {
-		case 1:
+		case 3:
+		case 4:
+		case 2:
 			g.setColor(Color.MAGENTA);
 			g.drawRect((int)tile.getX(), (int)tile.getY(), (int)tile.getWidth(), (int)tile.getHeight());
 			break;

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import game.phys.Hitbox;
+import game.phys.hitbox.Hitbox;
 import nightingale.game.NGameObject;
 import nightingale.util.NCamera;
 

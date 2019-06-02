@@ -1,4 +1,4 @@
-package game.phys;
+package game.phys.hitbox;
 
 class Point {
 	public float x, y;
