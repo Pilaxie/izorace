@@ -41,6 +41,14 @@ public class RaceMap extends NMap{
 		}
 	}
 	
+	public NMapTile getTile(int i, int j) {
+		return tiles[i][j];
+	}
+	
+	public NMapTile[][] getTiles(){
+		return tiles;
+	}
+	
 	public void draw(MapDrawer drawer, Graphics g, Graphics2D g2d, AffineTransform at) {
 		for(int i=0;i<tiles.length;i++) {
 			for(int j=0;j<tiles[0].length;j++) {

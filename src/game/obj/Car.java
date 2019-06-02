@@ -77,15 +77,18 @@ public class Car extends NGameObject{
 		this.hitbox = new RectHitbox(getX(), getY(), getWidth(), getHeight());
 	}
 	
-	public void update() {
+	public void move(float angle) {
 		// Move
 		if(v!=0) {
 			float _cx = (float)(getCenterX() - (V()*Math.cos(Math.PI*(angle+90)/180)));
 			float _cy = (float)(getCenterY() - (V()*Math.sin(Math.PI*(angle+90)/180)));
 			setCoordsByCenter(_cx, _cy);
-			v -= 1.4;
+			v -= 0.04;
 			if( v < 0) v = 0;
 		}
+	}
+	
+	public void update() {
 		// Hitbox update
 		hitbox.setX(getX());
 		hitbox.setY(getY());

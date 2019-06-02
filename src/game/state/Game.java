@@ -31,9 +31,12 @@ public class Game implements NState, MapDrawer{
 	
 	protected RaceMap currentMap;
 	
-	public Car car = new Car(Cars.Hatch, 250, 250);
+	public Car car = new Car(Cars.Hatch, 60, 280);
 	
 	public boolean paused = false;
+	
+	
+	public static boolean collide = false;
 	
 	public Game() {
 		pauseMenu.addElement("PAUSE_LABEL", new NLabel("PAUSED", 340, 250, 100, 30));
@@ -52,6 +55,9 @@ public class Game implements NState, MapDrawer{
 		currentMap.draw(this, g, g2d, at);
 		car.draw(g, g2d, at, cam);
 		
+		g.setColor(Color.RED);
+		if(Game.collide) g.fillRect(5, 5, 10, 10);
+		
 		if(paused) 
 			pauseMenu.draw(g, g2d, at);
 	}
@@ -63,8 +69,10 @@ public class Game implements NState, MapDrawer{
 			pauseMenu.perform(IzoRace.in);
 		}
 		
+		car.move(car.getAngle());
 		car.update();
-		Phys.mapCollision(car.getHitbox(), this.currentMap);
+		Phys.mapCollision(car, this.currentMap);
+		car.update();
 		
 		//INPUT
 		if(Input.ESC_KEY.isClicked()) paused = !paused;
