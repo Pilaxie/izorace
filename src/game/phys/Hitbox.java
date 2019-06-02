@@ -13,9 +13,17 @@ public class Hitbox extends NGameObject {
 	
 	public float getAngle() { return angle; }
 	
-	public void setAngle(float angle) { this.angle = angle; }
+	public void setAngle(float angle) { 
+		this.angle = angle;
+		if(this.angle < 0)
+			this.angle += 360;
+		else if(this.angle > 360)
+			this.angle -= 360;
+	}
 	
 	protected float R = 0;
+	
+	public float R() { return R; }
 	
 	public Hitbox(float x, float y, float w, float h) {
 		super(x, y, w, h);
@@ -25,7 +33,6 @@ public class Hitbox extends NGameObject {
 		
 		R = (float)Math.sqrt( Math.pow(width/2 , 2) + 
 			      Math.pow(height/2, 2) );
-		
 		update();
 	}
 	

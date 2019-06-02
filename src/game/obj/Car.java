@@ -13,6 +13,7 @@ public class Car extends NGameObject{
 	protected Cars kind = null;
 	protected Hitbox hitbox = null;
 	
+	protected float angle = 0;
 	protected float maxV = 0;
 	protected float v = 0;
 	protected float turningSpeed = 0;
@@ -22,6 +23,7 @@ public class Car extends NGameObject{
 	// Getters
 	public Hitbox getHitbox() { return hitbox; }	
 	
+	public float        getAngle() { return        angle; }
 	public float         getMaxV() { return         maxV; }
 	public float               V() { return            v; }
 	public float getTurningSpeed() { return turningSpeed; }
@@ -35,6 +37,29 @@ public class Car extends NGameObject{
 		else if (V() < 0 ) this.v = 0;
 	}
 	
+	private void setCoordsByCenter(float cx, float cy) {
+		setX(cx - getWidth()/2);
+		setY(cy - getHeight()/2);
+	}
+	
+	
+	private void checkAngleRange() {
+		if(this.angle < 0)
+			this.angle += 360;
+		else if(this.angle > 360)
+			this.angle -= 360;
+	}
+	
+	public void turnLeft() {
+		angle -= turningSpeed;
+		checkAngleRange();
+	}
+	
+	public void turnRight() {
+		angle += turningSpeed;
+		checkAngleRange();
+	}
+	
 	public void Gas() {
 		setV(V()+getAcceleration());
 	}
@@ -46,10 +71,26 @@ public class Car extends NGameObject{
 		super(x, y, kind.getSpecs().getWidth(), kind.getSpecs().getHeight());
 		this.kind = kind;
 		this.maxV = this.kind.getSpecs().getMaxV();
+		this.acceleration = this.kind.getSpecs().getAcceleration();
+		this.turningSpeed = this.kind.getSpecs().getTurningSpeed();
+		this.brake = this.kind.getSpecs().getBrake();
 		this.hitbox = new Hitbox(getX(), getY(), getWidth(), getHeight());
+		this.hitbox.update();
 	}
 	
 	public void update() {
+		// Move
+		if(v!=0) {
+			float _cx = (float)(getCenterX() - (V()*Math.cos(Math.PI*(angle+90)/180)));
+			float _cy = (float)(getCenterY() - (V()*Math.sin(Math.PI*(angle+90)/180)));
+			setCoordsByCenter(_cx, _cy);
+			v -= 1.4;
+			if( v < 0) v = 0;
+		}
+		// Hitbox update
+		hitbox.setX(getX());
+		hitbox.setY(getY());
+		hitbox.setAngle(getAngle());
 		hitbox.update();
 	}
 	
@@ -57,6 +98,7 @@ public class Car extends NGameObject{
 		at = AffineTransform.getTranslateInstance(getX(cam)+getWidth(cam)/2, getY(cam)+getHeight(cam)/2);
 		at.scale(cam.delta, cam.delta);
 		at.rotate(Math.toRadians(hitbox.getAngle()));
+		
 		g.setColor(Color.YELLOW);
 		hitbox.draw(g);
 	}

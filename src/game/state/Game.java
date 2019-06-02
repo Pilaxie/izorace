@@ -7,6 +7,8 @@ import java.awt.geom.AffineTransform;
 
 import game.Input;
 import game.IzoRace;
+import game.obj.Car;
+import game.obj.Cars;
 import game.obj.map.MapDrawer;
 import game.obj.map.RaceMap;
 import game.state.listener.GameActionListener;
@@ -16,13 +18,17 @@ import nightingale.ui.NActionListener;
 import nightingale.ui.NButton;
 import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
+import nightingale.util.NCamera;
 
 public class Game implements NState, MapDrawer{
 	protected NActionListener listener = new GameActionListener(this);
+	protected NCamera cam = new NCamera();
 
 	protected NUIGroup pauseMenu = new NUIGroup();
 	
 	protected RaceMap currentMap;
+	
+	public Car car = new Car(Cars.Hatch, 250, 250);
 	
 	public boolean paused = false;
 	
@@ -47,6 +53,7 @@ public class Game implements NState, MapDrawer{
 	@Override
 	public void draw(Graphics g, Graphics2D g2d, AffineTransform at) {
 		currentMap.draw(this, g, g2d, at);
+		car.draw(g, g2d, at, cam);
 		
 		if(paused) 
 			pauseMenu.draw(g, g2d, at);
@@ -58,9 +65,14 @@ public class Game implements NState, MapDrawer{
 		if(paused) {
 			pauseMenu.perform(IzoRace.in);
 		}
-			
+		
+		car.update();
+		
 		//INPUT
 		if(Input.ESC_KEY.isClicked()) paused = !paused;
+		if(Input.LEFT.isPressed()) car.turnLeft();
+		else if(Input.RIGHT.isPressed()) car.turnRight();
+		if(Input.UP.isPressed()) car.Gas();
 	}
 	
 	@Override
