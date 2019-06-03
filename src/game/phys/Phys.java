@@ -21,8 +21,7 @@ public class Phys {
 						car.getHitbox().collideWith(((RaceMapTile)map.getTile(i, j)).getHitbox())) {
 					Game.collide = true;
 					car.move(car.getAngle()+180);
-				}
-					
+				}	
 			}
 		}
 	}

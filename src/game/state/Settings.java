@@ -16,6 +16,7 @@ import game.state.listener.SettingsActionListener;
 import nightingale.state.NState;
 import nightingale.ui.NActionListener;
 import nightingale.ui.NButton;
+import nightingale.ui.NLabel;
 import nightingale.ui.NUIGroup;
 
 public class Settings implements NState{
@@ -28,8 +29,8 @@ public class Settings implements NState{
 		settings.clear();
 		settings.put("WIDTH", 800);
 		settings.put("HEIGHT", 600);
-		//settings.put("FULLSCREEN", 0);
-		//settings.put("VOLUME", 100);
+		settings.put("FULLSCREEN", 0);
+		settings.put("VOLUME", 100);
 		//settings.put("ANTI-ALIASING", 0);
 	}
 	
@@ -75,6 +76,8 @@ public class Settings implements NState{
 
 	public static void apply() {
 		IzoRace.canvas.setSize(Settings.get("WIDTH"), Settings.get("HEIGHT"));
+		IzoRace.setFullScreen(Settings.get("FULLSCREEN"));
+		IzoRace.setVolume(Settings.get("VOLUME"));
 		IzoRace.frameRefresh();
 	}
 	
@@ -99,8 +102,15 @@ public class Settings implements NState{
 	// State
 	protected NActionListener listener = new SettingsActionListener(this);
 	
-	NUIGroup uigroup = new NUIGroup();
+	public NUIGroup uigroup = new NUIGroup();
 	{
+		uigroup.addElement("+VOLUME_BUTTON", new NButton(100, 200, 50, 50));
+		uigroup.addElement("-VOLUME_BUTTON", new NButton(150, 200, 50, 50));
+		uigroup.addElement("VOLUME_LABEL", new NLabel(Integer.toString(Settings.get("VOLUME")), 385, 225, 10, 5));
+		
+		uigroup.addElement("FULLSCREEN_BUTTON", new NButton(100, 300, 100, 60));
+		uigroup.addElement("FULLSCREEN_LABEL", new NLabel(Integer.toString(Settings.get("FULLSCREEN")), 400, 330, 10, 5));
+		
 		uigroup.addElement("DEFAULT_SETTINGS", new NButton(100, 400, 100, 60));
 		uigroup.addElement("BACK_BUTTON", new NButton(450, 450, 100, 60));
 		// Set listener to all elements in group(MUST BE LAST LINE)

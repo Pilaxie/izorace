@@ -72,5 +72,15 @@ public class IzoRace {
 		renderThread.start();
 		updateThread.start();
 	}
+
+	public static void setFullScreen(int value) {
+		//TODO
+		
+	}
+
+	public static void setVolume(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
