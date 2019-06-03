@@ -31,7 +31,7 @@ public class Settings implements NState{
 		settings.put("HEIGHT", 600);
 		settings.put("FULLSCREEN", 0);
 		settings.put("VOLUME", 100);
-		//settings.put("ANTI-ALIASING", 0);
+		settings.put("ANTI-ALIASING", 0);
 	}
 	
 	public static void load(){
@@ -110,6 +110,9 @@ public class Settings implements NState{
 		
 		uigroup.addElement("FULLSCREEN_BUTTON", new NButton(100, 300, 100, 60));
 		uigroup.addElement("FULLSCREEN_LABEL", new NLabel(Integer.toString(Settings.get("FULLSCREEN")), 400, 330, 10, 5));
+		
+		uigroup.addElement("ANTI-ALIASING_BUTTON", new NButton(100, 100, 100, 60));
+		uigroup.addElement("ANTI-ALIASING_LABEL", new NLabel(Integer.toString(Settings.get("ANTI-ALIASING")), 400, 125, 10, 5));
 		
 		uigroup.addElement("DEFAULT_SETTINGS", new NButton(100, 400, 100, 60));
 		uigroup.addElement("BACK_BUTTON", new NButton(450, 450, 100, 60));

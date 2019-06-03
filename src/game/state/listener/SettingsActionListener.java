@@ -17,6 +17,7 @@ public class SettingsActionListener implements NActionListener {
 		if(element.getName() == "DEFAULT_SETTINGS") Settings.setDefaultSettings();	
 		else if(element.getName() == "BACK_BUTTON") IzoRace.stateHandler.setState("MENU_STATE");
 		else if (element.getName() == "FULLSCREEN_BUTTON") Settings.set("FULLSCREEN", (Settings.get("FULLSCREEN") == 0) ? 1 : 0);
+		else if (element.getName() == "ANTI-ALIASING_BUTTON") Settings.set("ANTI-ALIASING", (Settings.get("ANTI-ALIASING") == 0) ? 1 : 0);
 		else if (element.getName() == "+VOLUME_BUTTON") {
 			if (Settings.get("VOLUME") >= 100) return;
 			Settings.set("VOLUME", Settings.get("VOLUME") + 5);	
@@ -25,12 +26,15 @@ public class SettingsActionListener implements NActionListener {
 			if (Settings.get("VOLUME") <= 0) return;	
 			Settings.set("VOLUME", Settings.get("VOLUME") - 5);
 		}
+		NLabel label = (NLabel) state.uigroup.getElement("FULLSCREEN_LABEL");
 		
-		NLabel fullscreenLable = (NLabel) state.uigroup.getElement("FULLSCREEN_LABEL");
-		fullscreenLable.setText(Integer.toString(Settings.get("FULLSCREEN")));
+		label.setText(Integer.toString(Settings.get("FULLSCREEN")));
+			
+		label = (NLabel) state.uigroup.getElement("VOLUME_LABEL");
+		label.setText(Integer.toString(Settings.get("VOLUME")));
 		
-		NLabel volumeLabel = (NLabel) state.uigroup.getElement("VOLUME_LABEL");
-		volumeLabel.setText(Integer.toString(Settings.get("VOLUME")));
+		label = (NLabel) state.uigroup.getElement("ANTI-ALIASING_LABEL");
+		label.setText(Integer.toString(Settings.get("ANTI-ALIASING")));
 		
 		Settings.save();
 		Settings.apply();
